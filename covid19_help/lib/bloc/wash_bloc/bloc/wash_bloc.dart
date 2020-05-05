@@ -147,6 +147,13 @@ class WashBloc extends Bloc<WashEvent, WashState> {
         _firebaseRef.child('user_info').child(phone).update({
           'number_of_missed_washes': numberOfMissedWashes,
         });
+      }else{
+        _firebaseRef.child('users').child(user.uid).update({
+          'number_of_missed_washes': numberOfMissedWashes,
+        });
+        _firebaseRef.child('user_info').child(phone).update({
+          'number_of_missed_washes': numberOfMissedWashes,
+        });
       }
 
       // else {

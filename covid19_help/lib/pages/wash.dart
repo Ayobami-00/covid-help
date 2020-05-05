@@ -189,15 +189,14 @@ class _WashPageState extends State<WashPage> {
                       children: <Widget>[
                         InkWell(
                           onTap: () {
-                            if (DateTime.now().hour == 21) {
-                              _showAnotification();
-                            } else {
-                              _showNotification();
-                              _showDailyNotificationMorning();
-                              _showDailyNotificationMorning2();
-                              _showDailyNotificationMorning3();
-                              _showDailyNotificationEvening();
-                            }
+                            _show1notification();
+                            _show2notification();
+                            _show3notification();
+                            _show4notification();
+                            _showDailyNotificationMorning();
+                            _showDailyNotificationMorning2();
+                            _showDailyNotificationMorning3();
+                            _showDailyNotificationEvening();
 
                             BlocProvider.of<WashBloc>(context)
                                 .add(CleanHands());
@@ -210,15 +209,15 @@ class _WashPageState extends State<WashPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            if (DateTime.now().hour == 21) {
-                              _showAnotification();
-                            } else {
-                              _showNotification();
-                              _showDailyNotificationMorning();
-                              _showDailyNotificationMorning2();
-                              _showDailyNotificationMorning3();
-                              _showDailyNotificationEvening();
-                            }
+                            _show1notification();
+                            _show2notification();
+                            _show3notification();
+                            _show4notification();
+                            _showDailyNotificationMorning();
+                            _showDailyNotificationMorning2();
+                            _showDailyNotificationMorning3();
+                            _showDailyNotificationEvening();
+
                             BlocProvider.of<WashBloc>(context)
                                 .add(CleanHands());
                             showNotificationAlertDialog(context);
@@ -367,6 +366,7 @@ class _WashPageState extends State<WashPage> {
         'repeating description',
         ongoing: true,
         autoCancel: false,
+        sound: 'wash',
       );
       var iOSPlatformChannelSpecifics = IOSNotificationDetails();
       var platformChannelSpecifics = NotificationDetails(
@@ -392,7 +392,8 @@ class _WashPageState extends State<WashPage> {
       var androidPlatformChannelSpecifics = AndroidNotificationDetails(
           'repeatDailyAtTime channel id',
           'repeatDailyAtTime channel name',
-          'repeatDailyAtTime description');
+          'repeatDailyAtTime description',
+          sound: 'wash',);
       var iOSPlatformChannelSpecifics = IOSNotificationDetails();
       var platformChannelSpecifics = NotificationDetails(
           androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
@@ -416,7 +417,8 @@ class _WashPageState extends State<WashPage> {
       var androidPlatformChannelSpecifics = AndroidNotificationDetails(
           'repeatDailyAtTime channel id',
           'repeatDailyAtTime channel name',
-          'repeatDailyAtTime description');
+          'repeatDailyAtTime description',
+          sound: 'wash',);
       var iOSPlatformChannelSpecifics = IOSNotificationDetails();
       var platformChannelSpecifics = NotificationDetails(
           androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
@@ -440,7 +442,8 @@ class _WashPageState extends State<WashPage> {
       var androidPlatformChannelSpecifics = AndroidNotificationDetails(
           'repeatDailyAtTime channel id',
           'repeatDailyAtTime channel name',
-          'repeatDailyAtTime description');
+          'repeatDailyAtTime description',
+          sound: 'wash',);
       var iOSPlatformChannelSpecifics = IOSNotificationDetails();
       var platformChannelSpecifics = NotificationDetails(
           androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
@@ -466,7 +469,8 @@ class _WashPageState extends State<WashPage> {
       var androidPlatformChannelSpecifics = AndroidNotificationDetails(
           'repeatDailyAtTime channel id',
           'repeatDailyAtTime channel name',
-          'repeatDailyAtTime description');
+          'repeatDailyAtTime description',
+          sound: 'wash',);
       var iOSPlatformChannelSpecifics = IOSNotificationDetails();
       var platformChannelSpecifics = NotificationDetails(
           androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
@@ -482,11 +486,12 @@ class _WashPageState extends State<WashPage> {
 
   Future<void> _showAnotification() async {
     var scheduledNotificationDateTime =
-        DateTime.now().add(Duration(seconds: 2700));
+        DateTime.now().add(Duration(seconds: 10));
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'your other channel id',
         'your other channel name',
-        'your other channel description');
+        'your other channel description',
+        sound: 'wash',);
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     NotificationDetails platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
@@ -496,6 +501,102 @@ class _WashPageState extends State<WashPage> {
         'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
         scheduledNotificationDateTime,
         platformChannelSpecifics);
+  }
+
+  Future<void> _show1notification() async {
+    if ((DateTime.now().hour >= 18) ||
+        (DateTime.now().hour == 6) ||
+        ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
+    } else {
+      var scheduledNotificationDateTime =
+          DateTime.now().add(Duration(seconds: 2700));
+      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'your other channel id',
+          'your other channel name',
+          'your other channel description',
+          sound: 'wash',);
+      var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+      NotificationDetails platformChannelSpecifics = NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.schedule(
+          200,
+          'Time to Sanitize those hands!',
+          'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+          scheduledNotificationDateTime,
+          platformChannelSpecifics);
+    }
+  }
+
+  Future<void> _show2notification() async {
+    if ((DateTime.now().hour >= 18) ||
+        (DateTime.now().hour == 6) ||
+        ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
+    } else {
+      var scheduledNotificationDateTime =
+          DateTime.now().add(Duration(seconds: 5400));
+      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'your other channel id',
+          'your other channel name',
+          'your other channel description',
+          sound: 'wash',);
+      var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+      NotificationDetails platformChannelSpecifics = NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.schedule(
+          200,
+          'Time to Sanitize those hands!',
+          'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+          scheduledNotificationDateTime,
+          platformChannelSpecifics);
+    }
+  }
+
+  Future<void> _show3notification() async {
+    if ((DateTime.now().hour >= 18) ||
+        (DateTime.now().hour == 6) ||
+        ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
+    } else {
+      var scheduledNotificationDateTime =
+          DateTime.now().add(Duration(seconds: 8100));
+      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'your other channel id',
+          'your other channel name',
+          'your other channel description',
+          sound: 'wash',);
+      var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+      NotificationDetails platformChannelSpecifics = NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.schedule(
+          200,
+          'Time to Sanitize those hands!',
+          'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+          scheduledNotificationDateTime,
+          platformChannelSpecifics);
+    }
+  }
+
+  Future<void> _show4notification() async {
+    if ((DateTime.now().hour >= 18) ||
+        (DateTime.now().hour == 6) ||
+        ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
+    } else {
+      var scheduledNotificationDateTime =
+          DateTime.now().add(Duration(seconds: 10800));
+      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'your other channel id',
+          'your other channel name',
+          'your other channel description',
+          sound: 'wash',);
+      var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+      NotificationDetails platformChannelSpecifics = NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.schedule(
+          200,
+          'Time to Sanitize those hands!',
+          'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+          scheduledNotificationDateTime,
+          platformChannelSpecifics);
+    }
   }
 
   showNotificationAlertDialog(BuildContext context) {
