@@ -130,7 +130,6 @@ class _WashPageState extends State<WashPage> {
                     InkWell(
                       onTap: () {
                         showAlertDialog(context);
-                        _showAnotification();
                       },
                       child: Column(
                         children: <Widget>[
@@ -483,7 +482,7 @@ class _WashPageState extends State<WashPage> {
 
   Future<void> _showAnotification() async {
     var scheduledNotificationDateTime =
-        DateTime.now().add(Duration(seconds: 10));
+        DateTime.now().add(Duration(seconds: 2700));
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'your other channel id',
         'your other channel name',
