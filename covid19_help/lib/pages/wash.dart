@@ -92,7 +92,7 @@ class _WashPageState extends State<WashPage> {
   @override
   void initState() {
     super.initState();
-    
+
     // _doSomething();
     initializeNotification();
     _checkIfFirstLoad();
@@ -117,8 +117,7 @@ class _WashPageState extends State<WashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: HexColor("#d1e9ea"),
-        body: BlocBuilder<WashBloc, WashState>(
-            builder: (context, state) {
+        body: BlocBuilder<WashBloc, WashState>(builder: (context, state) {
           if (state is HandsWashed) {
             return ListView(children: <Widget>[
               SizedBox(height: 80.0),
@@ -140,11 +139,11 @@ class _WashPageState extends State<WashPage> {
                                 Text('to let us know!'),
                               ],
                             ),
-                            SizedBox(width:40.0),
+                            SizedBox(width: 40.0),
                             InkWell(
                               onTap: () {
                                 showAlertDialog(context);
-                                
+                                _showAnotification();
                               },
                               child: Column(
                                 children: <Widget>[
@@ -173,8 +172,11 @@ class _WashPageState extends State<WashPage> {
                           onTap: () {
                             _showNotification();
                             _showDailyNotificationMorning();
+                            _showDailyNotificationMorning2();
+                            _showDailyNotificationMorning3();
                             _showDailyNotificationEvening();
-                            BlocProvider.of<WashBloc>(context).add(CleanHands());
+                            BlocProvider.of<WashBloc>(context)
+                                .add(CleanHands());
                             showNotificationAlertDialog(context);
                           },
                           child: SvgPicture.asset(
@@ -186,8 +188,11 @@ class _WashPageState extends State<WashPage> {
                           onTap: () {
                             _showNotification();
                             _showDailyNotificationMorning();
+                            _showDailyNotificationMorning2();
+                            _showDailyNotificationMorning3();
                             _showDailyNotificationEvening();
-                            BlocProvider.of<WashBloc>(context).add(CleanHands());
+                            BlocProvider.of<WashBloc>(context)
+                                .add(CleanHands());
                             showNotificationAlertDialog(context);
                           },
                           child: SvgPicture.asset(
@@ -236,22 +241,38 @@ class _WashPageState extends State<WashPage> {
                     ],
                   ),
                   child: ListTile(
-                      leading: Icon(
-                        Icons.timer,
-                        color: Colors.white,
-                        size: 40.0,
-                      ),
-                      enabled: true,
-                      title: Text("Next Wash",
-                          style: TextStyle(color: Colors.white)),
-                      subtitle: Text(state.nextWashDate,
-                          style: TextStyle(color: Colors.white)),
-                      trailing: Text('Clean Your Hands',
-                          style: TextStyle(color: Colors.white))),
+                    leading: Icon(
+                      Icons.timer,
+                      color: Colors.white,
+                      size: 40.0,
+                    ),
+                    enabled: true,
+                    // title:
+                    // Text("Next Wash",
+                    //     style: TextStyle(color: Colors.white)),
+                    // subtitle: Text(state.nextWashDate,
+                    //     style: TextStyle(color: Colors.white)),
+                    title:state.numberOfMissedWashes == 1?  Text(
+                        'You have missed ${state.numberOfMissedWashes} wash',
+                        style: TextStyle(color: Colors.white)) : Text(
+                        'You have missed ${state.numberOfMissedWashes} wash',
+                        style: TextStyle(color: Colors.white))
+
+                    // Column(
+                    //   children: <Widget>[
+                    //     SizedBox(height: 10.0),
+                    // Text('You have missed ${state.numberOfMissedWashes} washes',
+                    //     style: TextStyle(color: Colors.white)),
+                    //         SizedBox(height: 5.0),
+                    //     Text('${state.numberOfMissedWashes} washes',
+                    //         style: TextStyle(color: Colors.white)),
+                    //   ],
+                    // )
+                  ),
                 ),
               ),
             ]);
-          } else if( state is WashInitial){
+          } else if (state is WashInitial) {
             return Loading();
           }
         }));
@@ -270,7 +291,9 @@ class _WashPageState extends State<WashPage> {
       "If you have fever, cough and difficulty breathing, seek medical care early":
           "Stay home if you feel unwell. If you have a fever, cough and difficulty breathing, seek medical attention and call in advance. Follow the directions of your local health authority. Why? National and local authorities will have the most up to date information on the situation in your area. Calling in advance will allow your health care provider to quickly direct you to the right health facility. This will also protect you and help prevent spread of viruses and other infections.",
       "Stay informed and follow advice given by your healthcare provider":
-          "Stay informed on the latest developments about COVID-19. Follow advice given by your healthcare provider, your national and local public health authority or your employer on how to protect yourself and others from COVID-19. Why? National and local authorities will have the most up to date information on whether COVID-19 is spreading in your area. They are best placed to advise on what people in your area should be doing to protect themselves."
+          "Stay informed on the latest developments about COVID-19. Follow advice given by your healthcare provider, your national and local public health authority or your employer on how to protect yourself and others from COVID-19. Why? National and local authorities will have the most up to date information on whether COVID-19 is spreading in your area. They are best placed to advise on what people in your area should be doing to protect themselves.",
+      "Remember to wear your facemasks":
+          "Always remember to wear your face mask everywhere you go to keep you protected"
     };
 
     String key =
@@ -305,10 +328,11 @@ class _WashPageState extends State<WashPage> {
     print('Notification entered');
     await flutterLocalNotificationsPlugin.cancelAll();
 
-    if ((DateTime.now().hour == 21) &&
-        (DateTime.now().hour == 6) &&
-        (DateTime.now().hour > 0) &&
-        (DateTime.now().hour < 7)) {
+    if ((DateTime.now().hour == 7) ||
+        (DateTime.now().hour == 8) ||
+        (DateTime.now().hour == 21) ||
+        (DateTime.now().hour == 6) ||
+        ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
       // Show a notification every minute with the first appearance happening a minute after invoking the method
       var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'repeating channel id',
@@ -350,6 +374,44 @@ class _WashPageState extends State<WashPage> {
         payload: 'NOTIFICATION');
   }
 
+  Future<void> _showDailyNotificationMorning2() async {
+    print('Morning entered');
+    var time = Time(7, 45, 0);
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'repeatDailyAtTime channel id',
+        'repeatDailyAtTime channel name',
+        'repeatDailyAtTime description');
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.showDailyAtTime(
+        50,
+        'Time to Sanitize those hands!',
+        'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+        time,
+        platformChannelSpecifics,
+        payload: 'NOTIFICATION');
+  }
+
+  Future<void> _showDailyNotificationMorning3() async {
+    print('Morning entered');
+    var time = Time(8, 30, 0);
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'repeatDailyAtTime channel id',
+        'repeatDailyAtTime channel name',
+        'repeatDailyAtTime description');
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.showDailyAtTime(
+        50,
+        'Time to Sanitize those hands!',
+        'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+        time,
+        platformChannelSpecifics,
+        payload: 'NOTIFICATION');
+  }
+
   Future<void> _showDailyNotificationEvening() async {
     print('Evening entered');
     await flutterLocalNotificationsPlugin.cancelAll();
@@ -369,6 +431,20 @@ class _WashPageState extends State<WashPage> {
         time,
         platformChannelSpecifics,
         payload: 'NOTIFICATION');
+  }
+
+  Future<void> _showAnotification() async {
+    var scheduledNotificationDateTime =
+        DateTime.now().add(Duration(seconds: 10));
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'your other channel id',
+        'your other channel name',
+        'your other channel description');
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    NotificationDetails platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.schedule(0, 'TEST', 'TEST WORKS',
+        scheduledNotificationDateTime, platformChannelSpecifics);
   }
 
   showNotificationAlertDialog(BuildContext context) {
@@ -413,6 +489,8 @@ class _WashPageState extends State<WashPage> {
     if (stringValue == 'True') {
       _showNotification();
       _showDailyNotificationMorning();
+      _showDailyNotificationMorning2();
+      _showDailyNotificationMorning3();
       _showDailyNotificationEvening();
       Sharedpreference().addStringToSF('FIRST_TIME', 'False');
     }

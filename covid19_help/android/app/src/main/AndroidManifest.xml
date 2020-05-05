@@ -11,8 +11,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
-        android:name="io.flutter.app.FlutterApplication"
-        android:label="covid help"
+        android:name="com.freetek.covid19_help.Application"
+        android:label="COVID Help"
         android:icon="@drawable/app_icon">
         <activity
             android:name=".MainActivity"
@@ -24,6 +24,10 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="FLUTTER_NOTIFICATION_CLICK" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />

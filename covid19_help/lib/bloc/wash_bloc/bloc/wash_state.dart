@@ -12,8 +12,11 @@ class WashInitial extends WashState {
 
 class HandsWashed extends WashState {
   final String nextWashDate;
+  final String numberOfMissedWashes;
 
-  HandsWashed(this.nextWashDate);
+  HandsWashed(this.nextWashDate, this.numberOfMissedWashes);
+
+  
   @override
   List<Object> get props => [nextWashDate];
 }

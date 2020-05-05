@@ -397,7 +397,7 @@ class _NewsPageState extends State<NewsPage> {
     "Zimbabwe": "ZW",
   };
   // List<SearchItem<int>> data;
-
+  
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -668,7 +668,31 @@ class _NewsPageTabViewState extends State<NewsPageTabView>
                   // shrinkWrap: true,
                   // physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
-                  int image_num = new Random().nextInt(20);
+                    int image_num = new Random().nextInt(20);
+                    Image image =  Image.network(
+                                'https://picsum.photos/250?image=$image_num',
+                                width: 60.0,
+                              );
+                    try{
+                      int image_num = new Random().nextInt(20);
+                      image = (( widget.news[index]['image_url'] == "None") || (widget.news[index]['image_url'] == "null"))
+                            ? Image.network(
+                                'https://picsum.photos/250?image=$image_num',
+                                width: 60.0,
+                              )
+                            : Image.network(
+                                widget.news[index]['image_url'],
+                                width: 60.0,
+                              );
+
+                    }catch(e){
+                      int image_num = new Random().nextInt(20);
+                      image = Image.network(
+                                'https://picsum.photos/250?image=$image_num',
+                                width: 60.0,
+                              );
+
+                    }
                     if (index == 0) {
                       return Text(" ");
                     } else {
@@ -685,15 +709,7 @@ class _NewsPageTabViewState extends State<NewsPageTabView>
                                     Text("Cannot open link at this time!")));
                           }
                         },
-                        leading: news_list[index]['image_url'] == "None"
-                            ? Image.network(
-                                'https://picsum.photos/250?image=$image_num',
-                                width: 60.0,
-                              )
-                            : Image.network(
-                                news_list[index]['image_url'],
-                                width: 60.0,
-                              ),
+                        leading: image,
                         title: Text(news_list[index]['title']),
                         subtitle: Text(news_list[index]['date']),
                       );

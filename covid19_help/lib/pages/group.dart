@@ -177,6 +177,7 @@ class _GroupPageState extends State<GroupPage> {
           } else if (state is GroupLoaded) {
             print(state.userId);
             return Scaffold(
+                resizeToAvoidBottomPadding: false,
                 backgroundColor: HexColor("#d1e9ea"),
                 appBar: AppBar(
                   elevation: 0.0,
@@ -221,19 +222,18 @@ class _GroupPageState extends State<GroupPage> {
                             Widget continueButton = FlatButton(
                               child: Text("Add"),
                               onPressed: () {
-                               
                                 Navigator.pop(context);
                                 BlocProvider.of<GroupBloc>(context).add(
                                     AddContact(_textFieldName.text,
                                         _textFieldPhone.text));
-                                 _textFieldName.clear();
+                                _textFieldName.clear();
                                 _textFieldPhone.clear();
-                                      
                               },
                             );
 
                             // set up the AlertDialog
                             AlertDialog alert = AlertDialog(
+                              
                               title: Text(
                                   "Input the following details to add your friend"),
                               content: Column(
@@ -364,14 +364,14 @@ class _FriendsState extends State<Friends> {
                       stream: _baseFirebaseRef
                           .child('user_info')
                           .child(data[key]['phone'])
-                          .child('last_wash_date')
+                          .child('number_of_missed_washes')
                           .onValue,
                       builder: (context, snap) {
                         if (snap.hasData &&
                             !snap.hasError &&
                             snap.data.snapshot.value != null) {
                           DataSnapshot snapshot = snap.data.snapshot;
-                          String value;
+                          int value;
                           // Map data = {};
                           value = snapshot.value;
                           // print(value);
@@ -408,11 +408,11 @@ class _FriendsState extends State<Friends> {
                                     padding: const EdgeInsets.only(left: 47.0),
                                     child: Row(
                                       children: <Widget>[
-                                        Text("Last wash Date: "),
+                                        Text("Number of missed Washes: "),
                                         SizedBox(
                                           width: 10.0,
                                         ),
-                                        Text(value,
+                                        Text("$value",
                                             style:
                                                 TextStyle(color: Colors.red)),
                                       ],

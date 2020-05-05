@@ -19,7 +19,6 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   String _currentCountry = 'Cameroon';
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
-  
 
   @override
   void didChangeDependencies() {
@@ -126,7 +125,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     Row(
                       children: <Widget>[
                         Text('Tiredness', style: TextStyle(fontSize: 15.0)),
-                        SizedBox(width:5),
+                        SizedBox(width: 5),
                         Image.asset(
                           "images/BeingSick_50px.png",
                           width: 30,
@@ -149,8 +148,8 @@ class _HistoryPageState extends State<HistoryPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: Text('CALL FOR CDC HELP',
-                      style:
-                          TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.bold)),
                 ),
                 SizedBox(height: 25.0),
                 Row(
@@ -224,20 +223,32 @@ class _HistoryPageState extends State<HistoryPage> {
                 // ),
                 InkWell(
                   onTap: () async {
-                    String url  = 'https://www.paypal.com/ng/webapps/mpp/send-money-online';
+                    String url =
+                        'https://www.paypal.com/ng/webapps/mpp/send-money-online';
                     if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                      
-                      }
+                      await launch(url);
+                    } else {}
                   },
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Image.asset(
-                        "images/paypal_1215259.png",
-                        width: 100,
+                      Column(
+                        children: <Widget>[
+                          Image.asset(
+                            "images/paypal_1215259.png",
+                            width: 100,
+                          ),
+                          Text('help@freetek.com.ng',style: TextStyle(fontSize: 16.0,color: Colors.blue)),
+                        ],
                       ),
-                      Text('help@freetek.com.ng')
+                      Column(
+                        children: <Widget>[
+                          Text('0153339247',style: TextStyle(fontSize: 16.0,color: Colors.blue)),
+                          SizedBox(height: 10.0),
+                          Text('GTBank',style: TextStyle(fontSize: 16.0,color: Colors.blue)),
+                          SizedBox(height: 15.0),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -246,12 +257,10 @@ class _HistoryPageState extends State<HistoryPage> {
                 InkWell(
                   onTap: () async {
                     // user.signOut();
-                    String url  = 'https://www.freetek.com.ng';
+                    String url = 'https://www.freetek.com.ng';
                     if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                      
-                      }
+                      await launch(url);
+                    } else {}
                   },
                   child: Row(
                     children: <Widget>[

@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> {
               size: 35.0
             ),
             title: new Text(
-              'History',
+              'Symptoms',
               style: TextStyle(color: Colors.black),
             ),
           ),
