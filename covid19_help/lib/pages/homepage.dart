@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
               // color: Colors.black,
             ),
             title: new Text(
-              'Group',
+              'Friends',
               style: TextStyle(color: Colors.black),
             ),
           ),

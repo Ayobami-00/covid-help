@@ -120,9 +120,35 @@ class _WashPageState extends State<WashPage> {
         body: BlocBuilder<WashBloc, WashState>(builder: (context, state) {
           if (state is HandsWashed) {
             return ListView(children: <Widget>[
-              SizedBox(height: 80.0),
+              SizedBox(height: 20.0),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                padding: const EdgeInsets.only(right: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    SizedBox(width: 40.0),
+                    InkWell(
+                      onTap: () {
+                        showAlertDialog(context);
+                        _showAnotification();
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          SvgPicture.asset(
+                            'images/Iconawesome-lightbulb.svg',
+                            width: 30.0,
+                          ),
+                          SizedBox(height: 10.0),
+                          Text('More Tips'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 30.0),
                 child: Container(
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -131,37 +157,31 @@ class _WashPageState extends State<WashPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
+                            SizedBox(width: 10.0),
                             Column(
                               children: <Widget>[
-                                Text('How did you sanitize your hands?'),
-                                Text('With soap or a sanitizer?'),
-                                Text('Touch the right icon'),
-                                Text('to let us know!'),
+                                Text('How did you sanitize your hands?',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                SizedBox(height: 5.0),
+                                Text('With soap or a hand sanitizer?',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                SizedBox(height: 5.0),
+                                Text(
+                                    'Click on the right icon below to let us know!',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(''),
                               ],
                             ),
-                            SizedBox(width: 40.0),
-                            InkWell(
-                              onTap: () {
-                                showAlertDialog(context);
-                                _showAnotification();
-                              },
-                              child: Column(
-                                children: <Widget>[
-                                  SvgPicture.asset(
-                                    'images/Iconawesome-lightbulb.svg',
-                                    width: 30.0,
-                                  ),
-                                  SizedBox(height: 10.0),
-                                  Text('More Tips'),
-                                ],
-                              ),
-                            ),
+                            SizedBox(width: 20.0),
                           ],
                         ),
                       ]),
                 ),
               ),
-              SizedBox(height: 50.0),
+              SizedBox(height: 20.0),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Container(
@@ -170,11 +190,16 @@ class _WashPageState extends State<WashPage> {
                       children: <Widget>[
                         InkWell(
                           onTap: () {
-                            _showNotification();
-                            _showDailyNotificationMorning();
-                            _showDailyNotificationMorning2();
-                            _showDailyNotificationMorning3();
-                            _showDailyNotificationEvening();
+                            if (DateTime.now().hour == 21) {
+                              _showAnotification();
+                            } else {
+                              _showNotification();
+                              _showDailyNotificationMorning();
+                              _showDailyNotificationMorning2();
+                              _showDailyNotificationMorning3();
+                              _showDailyNotificationEvening();
+                            }
+
                             BlocProvider.of<WashBloc>(context)
                                 .add(CleanHands());
                             showNotificationAlertDialog(context);
@@ -186,11 +211,15 @@ class _WashPageState extends State<WashPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            _showNotification();
-                            _showDailyNotificationMorning();
-                            _showDailyNotificationMorning2();
-                            _showDailyNotificationMorning3();
-                            _showDailyNotificationEvening();
+                            if (DateTime.now().hour == 21) {
+                              _showAnotification();
+                            } else {
+                              _showNotification();
+                              _showDailyNotificationMorning();
+                              _showDailyNotificationMorning2();
+                              _showDailyNotificationMorning3();
+                              _showDailyNotificationEvening();
+                            }
                             BlocProvider.of<WashBloc>(context)
                                 .add(CleanHands());
                             showNotificationAlertDialog(context);
@@ -215,7 +244,7 @@ class _WashPageState extends State<WashPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 40.0),
+              SizedBox(height: 10.0),
               Padding(
                 padding: const EdgeInsets.only(left: 0.0, right: 210.0),
                 child: Container(
@@ -225,7 +254,7 @@ class _WashPageState extends State<WashPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 30.0),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Container(
@@ -241,34 +270,35 @@ class _WashPageState extends State<WashPage> {
                     ],
                   ),
                   child: ListTile(
-                    leading: Icon(
-                      Icons.timer,
-                      color: Colors.white,
-                      size: 40.0,
-                    ),
-                    enabled: true,
-                    // title:
-                    // Text("Next Wash",
-                    //     style: TextStyle(color: Colors.white)),
-                    // subtitle: Text(state.nextWashDate,
-                    //     style: TextStyle(color: Colors.white)),
-                    title:state.numberOfMissedWashes == 1?  Text(
-                        'You have missed ${state.numberOfMissedWashes} wash',
-                        style: TextStyle(color: Colors.white)) : Text(
-                        'You have missed ${state.numberOfMissedWashes} wash',
-                        style: TextStyle(color: Colors.white))
+                      leading: Icon(
+                        Icons.timer,
+                        color: Colors.white,
+                        size: 40.0,
+                      ),
+                      enabled: true,
+                      // title:
+                      // Text("Next Wash",
+                      //     style: TextStyle(color: Colors.white)),
+                      // subtitle: Text(state.nextWashDate,
+                      //     style: TextStyle(color: Colors.white)),
+                      title: state.numberOfMissedWashes == "Probably Asleep"
+                          ? Text("Probably Asleep",
+                              style: TextStyle(color: Colors.white))
+                          : Text(
+                              'You have missed ${state.numberOfMissedWashes} washes',
+                              style: TextStyle(color: Colors.white))
 
-                    // Column(
-                    //   children: <Widget>[
-                    //     SizedBox(height: 10.0),
-                    // Text('You have missed ${state.numberOfMissedWashes} washes',
-                    //     style: TextStyle(color: Colors.white)),
-                    //         SizedBox(height: 5.0),
-                    //     Text('${state.numberOfMissedWashes} washes',
-                    //         style: TextStyle(color: Colors.white)),
-                    //   ],
-                    // )
-                  ),
+                      // Column(
+                      //   children: <Widget>[
+                      //     SizedBox(height: 10.0),
+                      // Text('You have missed ${state.numberOfMissedWashes} washes',
+                      //     style: TextStyle(color: Colors.white)),
+                      //         SizedBox(height: 5.0),
+                      //     Text('${state.numberOfMissedWashes} washes',
+                      //         style: TextStyle(color: Colors.white)),
+                      //   ],
+                      // )
+                      ),
                 ),
               ),
             ]);
@@ -325,14 +355,12 @@ class _WashPageState extends State<WashPage> {
   }
 
   Future<void> _showNotification() async {
-    print('Notification entered');
-    await flutterLocalNotificationsPlugin.cancelAll();
-
-    if ((DateTime.now().hour == 7) ||
-        (DateTime.now().hour == 8) ||
-        (DateTime.now().hour == 21) ||
+    if ((DateTime.now().hour == 21) ||
         (DateTime.now().hour == 6) ||
         ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
+    } else {
+      print('Notification entered');
+      await flutterLocalNotificationsPlugin.cancelAll();
       // Show a notification every minute with the first appearance happening a minute after invoking the method
       var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'repeating channel id',
@@ -356,81 +384,101 @@ class _WashPageState extends State<WashPage> {
   }
 
   Future<void> _showDailyNotificationMorning() async {
-    print('Morning entered');
-    var time = Time(7, 0, 0);
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'repeatDailyAtTime channel id',
-        'repeatDailyAtTime channel name',
-        'repeatDailyAtTime description');
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.showDailyAtTime(
-        50,
-        'Time to Sanitize those hands!',
-        'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
-        time,
-        platformChannelSpecifics,
-        payload: 'NOTIFICATION');
+    if ((DateTime.now().hour == 21) ||
+        (DateTime.now().hour == 6) ||
+        ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
+    } else {
+      print('Morning entered');
+      var time = Time(7, 0, 0);
+      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'repeatDailyAtTime channel id',
+          'repeatDailyAtTime channel name',
+          'repeatDailyAtTime description');
+      var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+      var platformChannelSpecifics = NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.showDailyAtTime(
+          50,
+          'Time to Sanitize those hands!',
+          'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+          time,
+          platformChannelSpecifics,
+          payload: 'NOTIFICATION');
+    }
   }
 
   Future<void> _showDailyNotificationMorning2() async {
-    print('Morning entered');
-    var time = Time(7, 45, 0);
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'repeatDailyAtTime channel id',
-        'repeatDailyAtTime channel name',
-        'repeatDailyAtTime description');
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.showDailyAtTime(
-        50,
-        'Time to Sanitize those hands!',
-        'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
-        time,
-        platformChannelSpecifics,
-        payload: 'NOTIFICATION');
+    if ((DateTime.now().hour == 21) ||
+        (DateTime.now().hour == 6) ||
+        ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
+    } else {
+      print('Morning entered');
+      var time = Time(7, 45, 0);
+      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'repeatDailyAtTime channel id',
+          'repeatDailyAtTime channel name',
+          'repeatDailyAtTime description');
+      var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+      var platformChannelSpecifics = NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.showDailyAtTime(
+          50,
+          'Time to Sanitize those hands!',
+          'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+          time,
+          platformChannelSpecifics,
+          payload: 'NOTIFICATION');
+    }
   }
 
   Future<void> _showDailyNotificationMorning3() async {
-    print('Morning entered');
-    var time = Time(8, 30, 0);
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'repeatDailyAtTime channel id',
-        'repeatDailyAtTime channel name',
-        'repeatDailyAtTime description');
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.showDailyAtTime(
-        50,
-        'Time to Sanitize those hands!',
-        'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
-        time,
-        platformChannelSpecifics,
-        payload: 'NOTIFICATION');
+    if ((DateTime.now().hour == 21) ||
+        (DateTime.now().hour == 6) ||
+        ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
+    } else {
+      print('Morning entered');
+      var time = Time(8, 30, 0);
+      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'repeatDailyAtTime channel id',
+          'repeatDailyAtTime channel name',
+          'repeatDailyAtTime description');
+      var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+      var platformChannelSpecifics = NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.showDailyAtTime(
+          50,
+          'Time to Sanitize those hands!',
+          'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+          time,
+          platformChannelSpecifics,
+          payload: 'NOTIFICATION');
+    }
   }
 
   Future<void> _showDailyNotificationEvening() async {
-    print('Evening entered');
-    await flutterLocalNotificationsPlugin.cancelAll();
+    if ((DateTime.now().hour == 21) ||
+        (DateTime.now().hour == 6) ||
+        ((DateTime.now().hour > 0) && (DateTime.now().hour < 7))) {
+    } else {
+      print('Evening entered');
+      await flutterLocalNotificationsPlugin.cancelAll();
 
-    var time = Time(22, 0, 0);
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'repeatDailyAtTime channel id',
-        'repeatDailyAtTime channel name',
-        'repeatDailyAtTime description');
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.showDailyAtTime(
-        60,
-        'Time to Sanitize those hands!',
-        'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
-        time,
-        platformChannelSpecifics,
-        payload: 'NOTIFICATION');
+      var time = Time(22, 0, 0);
+      var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'repeatDailyAtTime channel id',
+          'repeatDailyAtTime channel name',
+          'repeatDailyAtTime description');
+      var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+      var platformChannelSpecifics = NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      await flutterLocalNotificationsPlugin.showDailyAtTime(
+          60,
+          'Time to Sanitize those hands!',
+          'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+          time,
+          platformChannelSpecifics,
+          payload: 'NOTIFICATION');
+    }
   }
 
   Future<void> _showAnotification() async {
@@ -443,8 +491,12 @@ class _WashPageState extends State<WashPage> {
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     NotificationDetails platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.schedule(0, 'TEST', 'TEST WORKS',
-        scheduledNotificationDateTime, platformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.schedule(
+        200,
+        'Time to Sanitize those hands!',
+        'It is time to wash those hands, wash your hands using your preferred method and go to the Wash page to tell everyone that you have done so!',
+        scheduledNotificationDateTime,
+        platformChannelSpecifics);
   }
 
   showNotificationAlertDialog(BuildContext context) {
@@ -487,11 +539,12 @@ class _WashPageState extends State<WashPage> {
     //Return String
     String stringValue = prefs.getString('FIRST_TIME');
     if (stringValue == 'True') {
-      _showNotification();
-      _showDailyNotificationMorning();
-      _showDailyNotificationMorning2();
-      _showDailyNotificationMorning3();
-      _showDailyNotificationEvening();
+      _showAnotification();
+      // _showNotification();
+      // _showDailyNotificationMorning();
+      // _showDailyNotificationMorning2();
+      // _showDailyNotificationMorning3();
+      // _showDailyNotificationEvening();
       Sharedpreference().addStringToSF('FIRST_TIME', 'False');
     }
   }
