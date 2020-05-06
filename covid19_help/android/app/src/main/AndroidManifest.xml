@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.freetek.covid19_help">
+    package="com.freeetek.covid19_help">
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
-        android:name="com.freetek.covid19_help.Application"
+        android:name="com.freeetek.covid19_help.Application"
         android:label="COVID Help"
         android:icon="@drawable/app_icon">
         <activity

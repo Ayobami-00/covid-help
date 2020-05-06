@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "749748209576",
+    "firebase_url": "https://free-from-corona-virus.firebaseio.com",
+    "project_id": "free-from-corona-virus",
+    "storage_bucket": "free-from-corona-virus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749748209576:android:c22a404df38006f719ff9d",
+        "android_client_info": {
+          "package_name": "com.example.free_from_corona"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749748209576-j1ggpoa6igsr6dvt2tstk57jsk3gah5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD56hf2gykG9cuRInuwvrQeMJdHrSpTOvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749748209576-j1ggpoa6igsr6dvt2tstk57jsk3gah5i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "749748209576-9db5gea1rvsc63ipg2oih3apfj6hfugi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "freetek.app-gmail.com.COVIDHelp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749748209576:android:fdd93a23d1f3492619ff9d",
+        "android_client_info": {
+          "package_name": "com.freetek.covid19_help"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749748209576-j1ggpoa6igsr6dvt2tstk57jsk3gah5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD56hf2gykG9cuRInuwvrQeMJdHrSpTOvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749748209576-j1ggpoa6igsr6dvt2tstk57jsk3gah5i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "749748209576-9db5gea1rvsc63ipg2oih3apfj6hfugi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "freetek.app-gmail.com.COVIDHelp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749748209576:android:ff5840dc32de6af319ff9d",
+        "android_client_info": {
+          "package_name": "com.freetek.covidhelp.covidhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749748209576-j1ggpoa6igsr6dvt2tstk57jsk3gah5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD56hf2gykG9cuRInuwvrQeMJdHrSpTOvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749748209576-j1ggpoa6igsr6dvt2tstk57jsk3gah5i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "749748209576-9db5gea1rvsc63ipg2oih3apfj6hfugi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "freetek.app-gmail.com.COVIDHelp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

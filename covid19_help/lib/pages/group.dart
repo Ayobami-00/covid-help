@@ -233,7 +233,6 @@ class _GroupPageState extends State<GroupPage> {
 
                             // set up the AlertDialog
                             AlertDialog alert = AlertDialog(
-                              
                               title: Text(
                                   "Input the following details to add your friend"),
                               content: Column(
@@ -371,9 +370,17 @@ class _FriendsState extends State<Friends> {
                             !snap.hasError &&
                             snap.data.snapshot.value != null) {
                           DataSnapshot snapshot = snap.data.snapshot;
-                          int value;
+                          String value;
                           // Map data = {};
-                          value = snapshot.value;
+                          if ((DateTime.now().hour == 21) ||
+                              (DateTime.now().hour == 6) ||
+                              ((DateTime.now().hour > 0) &&
+                                  (DateTime.now().hour < 7))) {
+                            value = "Probably Asleep";
+                          } else {
+                            value = snapshot.value.toString();
+                          }
+
                           // print(value);
 
                           return Card(
@@ -412,7 +419,7 @@ class _FriendsState extends State<Friends> {
                                         SizedBox(
                                           width: 10.0,
                                         ),
-                                        Text("$value",
+                                        Text(value,
                                             style:
                                                 TextStyle(color: Colors.red)),
                                       ],
